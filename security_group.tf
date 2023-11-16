@@ -69,7 +69,7 @@ resource "aws_security_group" "cloudtech_web_sg" {
 
 # deploy時 httpのインバウンドルールは消す想定
 resource "aws_security_group_rule" "ingress_http_alb" {
-  security_group_id = aws_security_group.cloudtech_alb.id
+  security_group_id = aws_security_group.cloudtech_web_sg.id
   type              = "ingress"
   protocol          = "tcp"
   from_port         = "80"
@@ -78,7 +78,7 @@ resource "aws_security_group_rule" "ingress_http_alb" {
 }
 
 resource "aws_security_group_rule" "ingress_https_alb" {
-  security_group_id = aws_security_group.cloudtech_alb.id
+  security_group_id = aws_security_group.cloudtech_web_sg.id
   type              = "ingress"
   protocol          = "tcp"
   from_port         = "443"
