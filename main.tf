@@ -41,3 +41,7 @@ variable "environment" {
 variable "myip" {
   type = string
 }
+
+variable "domain" {
+  type = string
+}
