@@ -27,6 +27,12 @@ provider "aws" {
 
 }
 
+provider "aws" {
+  alias   = "virginia"
+  profile = "Administrator"
+  region  = "us-east-1"
+}
+
 #------------------------------------
 # Variables
 #------------------------------------
