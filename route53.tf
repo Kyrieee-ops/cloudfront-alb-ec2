@@ -21,7 +21,7 @@ resource "aws_route53_record" "aws_route53_record" {
   name    = var.domain
   type    = "A"
 
-  # ここはCloudFrontのドメイン名を指定する
+  # ここはCloudFrontのドメイン名を指定する (現時点ではALBに紐づけている)
   alias {
     name                   = aws_lb.cloudtech_alb.dns_name
     zone_id                = aws_lb.cloudtech_alb.zone_id

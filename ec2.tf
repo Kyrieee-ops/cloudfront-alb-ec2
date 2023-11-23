@@ -5,6 +5,7 @@
 data "aws_ssm_parameter" "amzn2_ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
+
 # 1台目のEC2
 resource "aws_instance" "cloudtech_webserver_ec2_1" {
   ami                         = data.aws_ssm_parameter.amzn2_ami.value
@@ -13,7 +14,8 @@ resource "aws_instance" "cloudtech_webserver_ec2_1" {
   associate_public_ip_address = false
   iam_instance_profile        = aws_iam_instance_profile.ssm_instance_profile.name
   vpc_security_group_ids = [
-    aws_security_group.cloudtech_ec2_ssm_sg.id
+    aws_security_group.cloudtech_ec2_ssm_sg.id,
+    aws_security_group.cloudtech_web_sg.id
   ]
   tags = {
     Name    = "${var.project}-webserver-1"
@@ -29,7 +31,8 @@ resource "aws_instance" "cloudtech_webserver_ec2_2" {
   associate_public_ip_address = false
   iam_instance_profile        = aws_iam_instance_profile.ssm_instance_profile.name
   vpc_security_group_ids = [
-    aws_security_group.cloudtech_ec2_ssm_sg.id
+    aws_security_group.cloudtech_ec2_ssm_sg.id,
+    aws_security_group.cloudtech_web_sg.id
   ]
   tags = {
     Name    = "${var.project}-webserver-2"
