@@ -8,7 +8,7 @@ resource "aws_cloudfront_distribution" "cloudtech_cloudfront" {
   price_class     = "PriceClass_All"
 
   origin {
-    domain_name = aws_route53_record.aws_route53_record.fqdn
+    domain_name = aws_route53_record.route53_alb.fqdn
     origin_id   = aws_lb.cloudtech_alb.name
 
     custom_origin_config {
@@ -42,11 +42,11 @@ resource "aws_cloudfront_distribution" "cloudtech_cloudfront" {
     }
   }
 
-  aliases = ["${var.domain}"]
+  aliases = ["cf.${var.domain}"]
 
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate.virginia_cert.arn
-    minimum_protocol_version = "TLSv1.2_2019"
+    minimum_protocol_version = "TLSv1.2_2021"
     ssl_support_method       = "sni-only"
   }
 }

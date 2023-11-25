@@ -12,11 +12,16 @@ resource "aws_instance" "cloudtech_webserver_ec2_1" {
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.cloudtech_subnet_private1.id
   associate_public_ip_address = false
-  iam_instance_profile        = aws_iam_instance_profile.ssm_instance_profile.name
+
+  iam_instance_profile = aws_iam_instance_profile.ssm_instance_profile.name
   vpc_security_group_ids = [
     aws_security_group.cloudtech_ec2_ssm_sg.id,
     aws_security_group.cloudtech_web_sg.id
   ]
+
+  # Apacheインストール
+  user_data = base64encode(file("./script.sh"))
+
   tags = {
     Name    = "${var.project}-webserver-1"
     Project = var.project
@@ -29,11 +34,16 @@ resource "aws_instance" "cloudtech_webserver_ec2_2" {
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.cloudtech_subnet_private1.id
   associate_public_ip_address = false
-  iam_instance_profile        = aws_iam_instance_profile.ssm_instance_profile.name
+
+  iam_instance_profile = aws_iam_instance_profile.ssm_instance_profile.name
   vpc_security_group_ids = [
     aws_security_group.cloudtech_ec2_ssm_sg.id,
     aws_security_group.cloudtech_web_sg.id
   ]
+
+  # Apacheインストール
+  user_data = base64encode(file("./script.sh"))
+
   tags = {
     Name    = "${var.project}-webserver-2"
     Project = var.project

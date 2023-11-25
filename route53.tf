@@ -17,9 +17,9 @@ resource "aws_route53_zone" "route53_zone" {
 # その独自ドメインになんのAWSリソースのDNS名を紐づけるかをaws_route53_recordで設定する
 # ALBに独自ドメインを紐づける
 #------------------------------------
-resource "aws_route53_record" "aws_route53_record" {
+resource "aws_route53_record" "route53_alb" {
   zone_id = aws_route53_zone.route53_zone.id
-  name    = var.domain
+  name    = "alb.${var.domain}"
   type    = "A"
 
   alias {
@@ -32,7 +32,7 @@ resource "aws_route53_record" "aws_route53_record" {
 # CloudFrontへ独自ドメインを紐づける
 resource "aws_route53_record" "route53_cloudfront" {
   zone_id = aws_route53_zone.route53_zone.id
-  name    = var.domain
+  name    = "cf.${var.domain}"
   type    = "A"
 
   alias {

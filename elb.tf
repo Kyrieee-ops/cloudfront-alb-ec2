@@ -6,7 +6,7 @@ resource "aws_lb" "cloudtech_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups = [
-    aws_security_group.cloudtech_web_sg.id
+    aws_security_group.cloudtech_alb_sg.id
   ]
   subnets = [
     aws_subnet.cloudtech_subnet_public1.id,
